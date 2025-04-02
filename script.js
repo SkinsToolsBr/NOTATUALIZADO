@@ -38,3 +38,8 @@ function signOut() {
     document.getElementById('login-container').style.display = 'block';
     document.getElementById('user-info').classList.add('hidden');
 }
+
+// Selecionar item
+function selecionarItem(nome, imagem) {
+    alert(`Você selecionou: ${nome}`);
+}
