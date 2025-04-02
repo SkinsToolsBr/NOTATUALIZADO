@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinsToolsBr</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: white;
+            text-align: center;
+        }
+        .title-3d {
+            color: #0099ff;
+            font-size: 40px;
+            text-shadow: 3px 3px 0px #004080, 6px 6px 0px #002060;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+        .image-container {
+            display: inline-block;
+            margin: 20px;
+            cursor: pointer;
+        }
+        .image-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 153, 255, 0.7);
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            display: none;
+            background-color: #007acc;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function validarID() {
+            const input = document.getElementById('user-id');
+            const errorMessage = document.getElementById('error-message');
+            input.value = input.value.replace(/\D/g, '');
+            errorMessage.style.display = input.value === '' ? 'block' : 'none';
+        }function abrirPagina(item, imgSrc) {
+        localStorage.setItem("item", item);
+        localStorage.setItem("imgSrc", imgSrc);
+        window.location.href = "pagina.html";
+    }
+</script>
+
+</head>
+<body>
+    <header>
+        <h1 class="title-3d">SkinsToolsBr</h1>
+    </header>
+    <div class="container">
+        <div class="image-container" onclick="abrirPagina('Barbinha', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10" alt="Barbinha">
+            <p>Barbinha</p>
+        </div>
+        <div class="image-container" onclick="abrirPagina('Calça Angelical', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10" alt="Calça Angelical">
+            <p>Calça Angelical</p>
+        </div>
+        <div class="image-container" onclick="abrirPagina('Verificado', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10" alt="Verificado">
+            <p>Verificado</p>
+        </div>
+    </div>
+</body>
+</html><!-- Segunda página (pagina.html) --><!DOCTYPE html><html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envio de Item</title>
+    <style>
+        body { background-color: #1c1c1c; color: white; text-align: center; }
+        .container { margin-top: 50px; }
+        img { width: 200px; border-radius: 10px; }
+    </style>
+    <script>
+        window.onload = function() {
+            document.getElementById("item-img").src = localStorage.getItem("imgSrc");
+            document.getElementById("item-name").textContent = localStorage.getItem("item");
+        }
+        function enviar() {
+            let userId = document.getElementById("user-id").value;
+            if (!userId) {
+                alert("Digite seu ID antes de enviar!");
+                return;
+            }
+            alert("Item enviado com sucesso para o ID: " + userId);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="item-name"></h1>
+        <img id="item-img" alt="Item Selecionado">
+        <p>Digite seu ID:</p>
+        <input type="text" id="user-id" placeholder="Seu ID aqui...">
+        <button onclick="enviar()">Enviar</button>
+    </div>
+</body>
+</html>
