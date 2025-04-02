@@ -1,79 +1,73 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkinsToolsBr</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1c1c1c;
-            color: white;
-            text-align: center;
-        }
-        .title-3d {
-            color: #0099ff;
-            font-size: 40px;
-            text-shadow: 3px 3px 0px #004080, 6px 6px 0px #002060;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            text-align: center;
-        }
-        .image-container {
-            display: inline-block;
-            margin: 20px;
-            cursor: pointer;
-        }
-        .image-container img {
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 153, 255, 0.7);
-        }
-        .hidden {
-            display: none;
-        }
-        .message {
-            display: none;
-            background-color: #007acc;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-    </style>
-    <script>
-        function validarID() {
-            const input = document.getElementById('user-id');
-            const errorMessage = document.getElementById('error-message');
-            input.value = input.value.replace(/\D/g, '');
-            errorMessage.style.display = input.value === '' ? 'block' : 'none';
-        }function abrirPagina(item, imgSrc) {
-        localStorage.setItem("item", item);
-        localStorage.setItem("imgSrc", imgSrc);
-        window.location.href = "pagina.html";
-    }
-</script>
-
+    <title>SkinsToolsBr - Enviar Skin/Verificado</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <header>
         <h1 class="title-3d">SkinsToolsBr</h1>
     </header>
-    <div class="container">
-        <div class="image-container" onclick="abrirPagina('Barbinha', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10')">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10" alt="Barbinha">
-            <p>Barbinha</p>
+    
+    <main>
+        <div class="container">
+            <!-- Botão de login -->
+            <div id="login-container">
+                <div id="g_id_onload"
+                     data-client_id="SUA_CLIENT_ID_AQUI"
+                     data-callback="onSignIn"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin" data-type="standard"></div>
+            </div>
+
+            <!-- Exibir informações do usuário após login -->
+            <div id="user-info" class="hidden">
+                <img id="user-photo" src="" alt="Foto do usuário">
+                <p id="user-name"></p>
+                <button class="button logout" onclick="signOut()">Sair</button>
+            </div>
+
+            <!-- Campo para inserir o ID -->
+            <label for="user-id">Digite seu ID:</label>
+            <input type="text" id="user-id" placeholder="Seu ID aqui..." oninput="validarID()">
+            
+            <!-- Mensagem de erro -->
+            <div id="error-message" class="hidden">Somente números</div>
+
+            <!-- Itens disponíveis -->
+            <div class="items-container">
+                <div class="item" onclick="selecionarItem('Barbinha', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10" alt="Barbinha">
+                    <p>Barbinha</p>
+                </div>
+
+                <div class="item" onclick="selecionarItem('Calça Angelical', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10" alt="Calça Angelical">
+                    <p>Calça Angelical</p>
+                </div>
+
+                <div class="item" onclick="selecionarItem('Verificado', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10" alt="Verificado">
+                    <p>Verificado</p>
+                </div>
+            </div>
+
+            <!-- Botão de enviar -->
+            <button class="button" onclick="enviarSkin()">Enviar</button>
+
+            <!-- Mensagem de sucesso -->
+            <p id="status" class="hidden">Envio bem-sucedido! ID: <span id="id-display"></span></p>
         </div>
-        <div class="image-container" onclick="abrirPagina('Calça Angelical', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10')">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10" alt="Calça Angelical">
-            <p>Calça Angelical</p>
-        </div>
-        <div class="image-container" onclick="abrirPagina('Verificado', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10')">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10" alt="Verificado">
-            <p>Verificado</p>
-        </div>
-    </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 SkinsToolsBr. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="script.js"></script>
 </body>
 </html>
