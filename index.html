@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinsToolsBr - Enviar Skin/Verificado</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <header>
+        <h1 class="title-3d">SkinsToolsBr</h1>
+    </header>
+    
+    <main>
+        <div class="container">
+            <!-- Botão de login -->
+            <div id="login-container">
+                <div id="g_id_onload"
+                     data-client_id="SUA_CLIENT_ID_AQUI"
+                     data-callback="onSignIn"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin" data-type="standard"></div>
+            </div>
+
+            <!-- Exibir informações do usuário após login -->
+            <div id="user-info" class="hidden">
+                <img id="user-photo" src="" alt="Foto do usuário">
+                <p id="user-name"></p>
+                <button class="button logout" onclick="signOut()">Sair</button>
+            </div>
+
+            <!-- Campo para inserir o ID -->
+            <label for="user-id">Digite seu ID:</label>
+            <input type="text" id="user-id" placeholder="Seu ID aqui..." oninput="validarID()">
+            
+            <!-- Mensagem de erro -->
+            <div id="error-message" class="hidden">Somente números</div>
+
+            <!-- Imagens das skins -->
+            <div class="image-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSv_RLKqopbs0PfzuXA-_SQm1YVjYDLv0nlYyXrezoyigg2V5RANz8JjW3&s=10" alt="Barbinha">
+                <p>Barbinha</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrNjTpoLfLNDWF22CcfrNcVA180NztZcGgd0QyA-dhZ17VlTDQRdi0K5E&s=10" alt="Calça Angelical">
+                <p>Calça Angelical</p>
+            </div>
+
+            <div class="image-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-N7TVsNyHn8PcpaGcLuFITr62mQQtaLdeJ4yQbUC7MSGvjOZLZiIjiw&s=10" alt="Verificado">
+                <p>Verificado</p>
+            </div>
+
+            <!-- Botão de enviar -->
+            <button class="button" onclick="enviarSkin()">Enviar Skin/Verificado</button>
+
+            <!-- Mensagem de sucesso -->
+            <p id="status" class="hidden">Envio bem-sucedido! ID: <span id="id-display"></span></p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 SkinsToolsBr. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
